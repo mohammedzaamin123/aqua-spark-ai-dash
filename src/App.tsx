@@ -18,7 +18,15 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Index />} />
-          <Route path="/dashboard/*" element={<Index />} />
+          <Route path="/dashboard/tenants" element={<Index />} />
+          <Route path="/dashboard/users" element={<Index />} />
+          <Route path="/dashboard/channels" element={<Index />} />
+          <Route path="/dashboard/chatbot" element={<Index />} />
+          <Route path="/dashboard/api-keys" element={<Index />} />
+          <Route path="/dashboard/database" element={<Index />} />
+          <Route path="/dashboard/integrations" element={<Index />} />
+          <Route path="/dashboard/webhooks" element={<Index />} />
+          <Route path="/dashboard/settings" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

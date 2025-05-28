@@ -2,13 +2,26 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
-import { DashboardHome } from '@/components/dashboard/DashboardHome';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
+
+// Import all page components
+import { DashboardPage } from './dashboard/DashboardPage';
+import { TenantsPage } from './dashboard/TenantsPage';
+import { UsersPage } from './dashboard/UsersPage';
+import { ChannelsPage } from './dashboard/ChannelsPage';
+import { ChatbotPage } from './dashboard/ChatbotPage';
+import { ApiKeysPage } from './dashboard/ApiKeysPage';
+import { DatabasePage } from './dashboard/DatabasePage';
+import { IntegrationsPage } from './dashboard/IntegrationsPage';
+import { WebhooksPage } from './dashboard/WebhooksPage';
+import { SettingsPage } from './dashboard/SettingsPage';
 
 const Index = () => {
   const [userRole, setUserRole] = useState<'admin' | 'user' | 'counselor'>('admin');
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     // Simulate authentication check and role determination
@@ -32,6 +45,36 @@ const Index = () => {
     checkAuth();
   }, []);
 
+  const renderPageContent = () => {
+    const path = location.pathname;
+    
+    switch (path) {
+      case '/dashboard':
+      case '/':
+        return <DashboardPage />;
+      case '/dashboard/tenants':
+        return <TenantsPage />;
+      case '/dashboard/users':
+        return <UsersPage />;
+      case '/dashboard/channels':
+        return <ChannelsPage />;
+      case '/dashboard/chatbot':
+        return <ChatbotPage />;
+      case '/dashboard/api-keys':
+        return <ApiKeysPage />;
+      case '/dashboard/database':
+        return <DatabasePage />;
+      case '/dashboard/integrations':
+        return <IntegrationsPage />;
+      case '/dashboard/webhooks':
+        return <WebhooksPage />;
+      case '/dashboard/settings':
+        return <SettingsPage />;
+      default:
+        return <DashboardPage />;
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 flex items-center justify-center">
@@ -51,7 +94,7 @@ const Index = () => {
       disableTransitionOnChange
     >
       <DashboardLayout userRole={userRole}>
-        <DashboardHome />
+        {renderPageContent()}
       </DashboardLayout>
     </ThemeProvider>
   );
