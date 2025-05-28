@@ -9,7 +9,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
   SidebarHeader,
   SidebarFooter,
 } from "@/components/ui/sidebar";
@@ -26,7 +25,7 @@ import {
   Building,
   Shield
 } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 interface MenuItem {
@@ -104,58 +103,62 @@ interface DashboardSidebarProps {
 }
 
 export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
+  const location = useLocation();
   const filteredMenuItems = menuItems.filter(item => item.roles.includes(userRole));
 
   return (
-    <Sidebar className="bg-navy-950/90 backdrop-blur-xl border-r border-white/10">
+    <Sidebar className="notion-sidebar slide-in-from-left">
       <SidebarHeader className="p-6">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric-500 to-teal-500 flex items-center justify-center">
-            <Bot className="w-6 h-6 text-white" />
+          <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg">
+            <Bot className="w-6 h-6 text-primary-foreground" />
           </div>
           <div>
-            <h2 className="text-xl font-poppins font-bold text-white">AI Platform</h2>
-            <p className="text-sm text-gray-400 capitalize">{userRole} Dashboard</p>
+            <h2 className="text-xl font-semibold text-sidebar-primary">AI Platform</h2>
+            <p className="text-sm text-sidebar-foreground capitalize">{userRole} Dashboard</p>
           </div>
         </div>
       </SidebarHeader>
       
       <SidebarContent className="px-4">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-gray-400 font-medium mb-2">
+          <SidebarGroupLabel className="text-sidebar-foreground font-medium mb-2">
             Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {filteredMenuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="group">
-                    <Link 
-                      to={item.url}
-                      className={cn(
-                        "flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200",
-                        "text-gray-300 hover:text-white hover:bg-white/10",
-                        "group-hover:bg-gradient-to-r group-hover:from-electric-500/20 group-hover:to-teal-500/20"
-                      )}
-                    >
-                      <item.icon className="w-5 h-5" />
-                      <span className="font-medium">{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {filteredMenuItems.map((item) => {
+                const isActive = location.pathname === item.url;
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild className="group">
+                      <Link 
+                        to={item.url}
+                        className={cn(
+                          "flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200",
+                          "text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent notion-hover",
+                          isActive && "bg-sidebar-accent text-sidebar-primary font-medium"
+                        )}
+                      >
+                        <item.icon className="w-5 h-5" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       
       <SidebarFooter className="p-4">
-        <div className="glass-dark rounded-xl p-4">
+        <div className="notion-card p-4">
           <div className="flex items-center space-x-2 mb-2">
-            <Shield className="w-4 h-4 text-electric-500" />
-            <span className="text-sm font-medium text-white">Role Access</span>
+            <Shield className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-sidebar-primary">Role Access</span>
           </div>
-          <p className="text-xs text-gray-400 capitalize">
+          <p className="text-xs text-sidebar-foreground capitalize">
             Logged in as {userRole}
           </p>
         </div>

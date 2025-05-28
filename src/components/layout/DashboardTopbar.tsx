@@ -17,27 +17,26 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 export function DashboardTopbar() {
   const { theme, setTheme } = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
-  const [notifications] = useState(3); // Mock notification count
+  const [notifications] = useState(3);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    // In a real app, implement search suggestions here
   };
 
   return (
-    <header className="h-16 bg-white/5 backdrop-blur-xl border-b border-white/10 px-6">
+    <header className="h-16 bg-card/50 backdrop-blur-lg border-b border-border px-6">
       <div className="flex items-center justify-between h-full">
         <div className="flex items-center space-x-4">
-          <SidebarTrigger className="text-white hover:bg-white/10" />
+          <SidebarTrigger className="text-foreground hover:bg-accent" />
           
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               type="text"
               placeholder="Search anything..."
               value={searchQuery}
               onChange={handleSearchChange}
-              className="w-96 pl-10 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:bg-white/20 transition-all duration-200"
+              className="w-96 pl-10 bg-background/50 border-border text-foreground placeholder:text-muted-foreground focus:bg-background transition-all duration-200"
             />
           </div>
         </div>
@@ -47,7 +46,7 @@ export function DashboardTopbar() {
           <Button
             variant="ghost"
             size="sm"
-            className="text-teal-400 hover:text-teal-300 hover:bg-teal-500/20"
+            className="text-primary hover:text-primary hover:bg-primary/10"
           >
             <HelpCircle className="w-4 h-4 mr-2" />
             AI Help
@@ -58,7 +57,7 @@ export function DashboardTopbar() {
             variant="ghost"
             size="sm"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="text-gray-300 hover:text-white hover:bg-white/10"
+            className="text-muted-foreground hover:text-foreground hover:bg-accent"
           >
             {theme === 'dark' ? (
               <Sun className="w-4 h-4" />
@@ -70,30 +69,30 @@ export function DashboardTopbar() {
           {/* Notifications */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="relative text-gray-300 hover:text-white hover:bg-white/10">
+              <Button variant="ghost" size="sm" className="relative text-muted-foreground hover:text-foreground hover:bg-accent">
                 <Bell className="w-4 h-4" />
                 {notifications > 0 && (
-                  <Badge className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-coral-500 text-white text-xs flex items-center justify-center p-0">
+                  <Badge className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-destructive text-destructive-foreground text-xs flex items-center justify-center p-0">
                     {notifications}
                   </Badge>
                 )}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-80 bg-navy-900/95 backdrop-blur-xl border-white/20">
+            <DropdownMenuContent align="end" className="w-80 notion-card">
               <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Notifications</h3>
+                <h3 className="font-semibold text-foreground mb-2">Notifications</h3>
                 <div className="space-y-2">
-                  <div className="p-3 bg-white/10 rounded-lg">
-                    <p className="text-sm text-white">New webhook delivery failed</p>
-                    <p className="text-xs text-gray-400">2 minutes ago</p>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <p className="text-sm text-foreground">New webhook delivery failed</p>
+                    <p className="text-xs text-muted-foreground">2 minutes ago</p>
                   </div>
-                  <div className="p-3 bg-white/10 rounded-lg">
-                    <p className="text-sm text-white">API usage limit warning</p>
-                    <p className="text-xs text-gray-400">1 hour ago</p>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <p className="text-sm text-foreground">API usage limit warning</p>
+                    <p className="text-xs text-muted-foreground">1 hour ago</p>
                   </div>
-                  <div className="p-3 bg-white/10 rounded-lg">
-                    <p className="text-sm text-white">New tenant registered</p>
-                    <p className="text-xs text-gray-400">3 hours ago</p>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <p className="text-sm text-foreground">New tenant registered</p>
+                    <p className="text-xs text-muted-foreground">3 hours ago</p>
                   </div>
                 </div>
               </div>
@@ -103,22 +102,22 @@ export function DashboardTopbar() {
           {/* User Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/10">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-electric-500 to-teal-500 flex items-center justify-center">
-                  <User className="w-4 h-4 text-white" />
+              <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-muted-foreground hover:text-foreground hover:bg-accent">
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                  <User className="w-4 h-4 text-primary-foreground" />
                 </div>
                 <span className="text-sm font-medium">Admin User</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-navy-900/95 backdrop-blur-xl border-white/20">
-              <DropdownMenuItem className="text-white hover:bg-white/10">
+            <DropdownMenuContent align="end" className="notion-card">
+              <DropdownMenuItem className="text-foreground hover:bg-accent">
                 Profile Settings
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-white hover:bg-white/10">
+              <DropdownMenuItem className="text-foreground hover:bg-accent">
                 Account Settings
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-white/20" />
-              <DropdownMenuItem className="text-coral-400 hover:bg-coral-500/20">
+              <DropdownMenuSeparator className="bg-border" />
+              <DropdownMenuItem className="text-destructive hover:bg-destructive/10">
                 Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
