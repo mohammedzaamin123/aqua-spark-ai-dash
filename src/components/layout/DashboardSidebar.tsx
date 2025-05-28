@@ -26,7 +26,7 @@ import {
   Building,
   Shield
 } from "lucide-react";
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 interface MenuItem {
@@ -131,7 +131,7 @@ export function DashboardSidebar({ userRole }: DashboardSidebarProps) {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild className="group">
                     <Link 
-                      href={item.url}
+                      to={item.url}
                       className={cn(
                         "flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200",
                         "text-gray-300 hover:text-white hover:bg-white/10",
