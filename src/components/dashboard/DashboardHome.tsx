@@ -14,11 +14,11 @@ import {
 
 export function DashboardHome() {
   return (
-    <div className="space-y-8 slide-in-from-right">
+    <div className="space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-4xl font-bold text-foreground">Dashboard Overview</h1>
-        <p className="text-muted-foreground text-lg">Monitor your AI platform performance and metrics</p>
+        <h1 className="text-4xl font-bold text-white font-poppins">Dashboard Overview</h1>
+        <p className="text-gray-400 text-lg">Monitor your AI platform performance and metrics</p>
       </div>
 
       {/* Main Metrics Grid */}
@@ -28,28 +28,28 @@ export function DashboardHome() {
           value="24"
           change="+12%"
           icon={Building}
-          color="blue"
+          color="electric"
         />
         <MetricCard
           title="Active Chat Sessions"
           value="1,847"
           change="+23%"
           icon={MessageSquare}
-          color="green"
+          color="teal"
         />
         <MetricCard
           title="API Requests Today"
           value="45.2K"
           change="+8%"
           icon={Zap}
-          color="orange"
+          color="coral"
         />
         <MetricCard
           title="Pending Webhooks"
           value="12"
           change="-15%"
           icon={Webhook}
-          color="red"
+          color="purple"
         />
       </div>
 
@@ -60,14 +60,14 @@ export function DashboardHome() {
           value="2,156"
           change="+5%"
           icon={Users}
-          color="blue"
+          color="electric"
         />
         <MetricCard
           title="Database Connections"
           value="8"
           change="0%"
           icon={Database}
-          color="green"
+          color="teal"
         />
         <MetricCard
           title="System Uptime"
@@ -79,10 +79,10 @@ export function DashboardHome() {
       </div>
 
       {/* Recent Activity Section */}
-      <div className="notion-card p-6 scale-in">
+      <div className="glass-dark rounded-2xl p-6 border border-white/10">
         <div className="flex items-center space-x-3 mb-6">
-          <Activity className="w-6 h-6 text-primary" />
-          <h2 className="text-2xl font-bold text-foreground">Recent Activity</h2>
+          <Activity className="w-6 h-6 text-electric-400" />
+          <h2 className="text-2xl font-bold text-white font-poppins">Recent Activity</h2>
         </div>
         
         <div className="space-y-4">
@@ -93,19 +93,19 @@ export function DashboardHome() {
             { action: "API key generated", tenant: "FinanceApp", time: "1 hour ago", type: "success" },
             { action: "Database connected", tenant: "EduTech", time: "2 hours ago", type: "success" }
           ].map((activity, index) => (
-            <div key={index} className="flex items-center justify-between p-4 bg-muted/30 rounded-lg notion-hover">
+            <div key={index} className="flex items-center justify-between p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-200">
               <div className="flex items-center space-x-4">
                 <div className={`w-3 h-3 rounded-full ${
-                  activity.type === 'success' ? 'bg-green-500' :
-                  activity.type === 'error' ? 'bg-red-500' :
-                  'bg-blue-500'
+                  activity.type === 'success' ? 'bg-teal-500' :
+                  activity.type === 'error' ? 'bg-coral-500' :
+                  'bg-electric-500'
                 }`}></div>
                 <div>
-                  <p className="text-foreground font-medium">{activity.action}</p>
-                  <p className="text-muted-foreground text-sm">Tenant: {activity.tenant}</p>
+                  <p className="text-white font-medium">{activity.action}</p>
+                  <p className="text-gray-400 text-sm">Tenant: {activity.tenant}</p>
                 </div>
               </div>
-              <span className="text-muted-foreground text-sm">{activity.time}</span>
+              <span className="text-gray-400 text-sm">{activity.time}</span>
             </div>
           ))}
         </div>

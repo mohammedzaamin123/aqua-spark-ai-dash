@@ -12,11 +12,11 @@ interface DashboardLayoutProps {
 export function DashboardLayout({ children, userRole = 'admin' }: DashboardLayoutProps) {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 dark:from-navy-950 dark:via-navy-900 dark:to-navy-800">
         <DashboardSidebar userRole={userRole} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <DashboardTopbar />
-          <main className="flex-1 overflow-auto p-6 fade-in">
+          <main className="flex-1 overflow-auto p-6">
             <div className="max-w-7xl mx-auto">
               {children}
             </div>
